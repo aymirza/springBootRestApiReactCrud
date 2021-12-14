@@ -1,7 +1,6 @@
 package com.example.springBootRestApiReactCrud.controller;
 
 import com.example.springBootRestApiReactCrud.model.Student;
-import com.example.springBootRestApiReactCrud.repository.StudentRepository;
 import com.example.springBootRestApiReactCrud.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +26,13 @@ public class StudentController {
     @GetMapping("/student/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id){
         return new ResponseEntity<>(studentService.getStudentById(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/st/{id}")
+    public  Student getStudentlet(@PathVariable Long id){
+        Student student = studentService.getStudentById(id);
+        student.setYear(student.getYear()+10);
+        return student;
     }
 
     @PutMapping("/student/{id}")
